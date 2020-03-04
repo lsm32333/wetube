@@ -41,7 +41,8 @@
   "scripts": {
     "dev:server": "nodemon --exec babel-node init.js --delay 2 --ignore 'scss' ",
     "dev:assets": "set WEBPACK_ENV=development&&webpack -w",
-    "build:assets": "set WEBPACK_ENV=production&&webpack"
+    "build:assets": "set WEBPACK_ENV=production&&webpack",
+    "tunnel": "ngrok http 4001"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^2.22.0",
