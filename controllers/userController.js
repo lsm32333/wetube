@@ -66,21 +66,6 @@ export const postGithubLogIn = (req, res) => {
   res.redirect(routes.home);
 };
 
-export const facebookLogin = passport.authenticate("facebook");
-
-export const facebookLoginCallback = (
-  accessToken,
-  refreshToken,
-  profile,
-  cb
-) => {
-  console.log(accessToken, refreshToken, profile, cb);
-};
-
-export const postFacebookLogin = (req, res) => {
-  res.redirect(routes.home);
-};
-
 export const getMe = (req, res) => {
   res.render("userDetail", { pageTitle: "User Detail", user: req.user });
 };
@@ -101,7 +86,25 @@ export const userDetail = async (req, res) => {
     res.redirect(routes.home);
   }
 };
-export const editProfile = (req, res) =>
+export const geteditProfile = (req, res) =>
   res.render("editProfile", { pageTitle: "Edit Profile" });
+
+export const postEditProfile = async(req, res) =>{
+  const {
+    body: {name, email},
+    file
+  } = req;
+  try{
+    await User.findByIdAndUpdate(req.user.id, {
+      name, 
+      email, 
+      avatarUrl: file ? file.path : req.user.avatarUrl
+    });
+    res.redirect(routes.me);
+  } catch(error){
+    res.render("changePassword", { pageTitle:"ChangePassword" });
+  }
+}
+
 export const changePassword = (req, res) =>
   res.render("changePassword", { pageTitle: "Change Password" });

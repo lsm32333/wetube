@@ -1,13 +1,13 @@
 extends layouts/main
-
+//- layouts 폴더의 main.pug를 복붙해 온다는 뜻이다. 해당 레이아웃을 사용할 수 있다.
+//- block 태그 안에 내용 추가하기!
 block content
-    .from-container
-        from(action=`/users${routes.editProfile}`, method="post")
+    .form-container
+        //- /users/~~~ 로 찾아가기 위해서 아랫줄과 같은 링크를 사용한다.
+        form(action=`/users${routes.editProfile}`, method="post", enctype="multipart/form-data")
             .fileUpload
                 label(for="avatar") Avatar
-                input(type="file", id="avatar", name="avatar")
-            input(type="text", placeholder="Name", name="name")
-            input(type="email", placeholder="Email", name="email")
+                input(type="file", id="avatar", name='avatar', accept="image/*")
+            input(type="text", placeholder="Name", name='name', value = loggedUser.name)
+            input(type="email", placeholder="Email", name="email", value = loggedUser.email)
             input(type="submit", value="Update Profile")
-        a.form-container__link(href=`/users${routes.changePassword}`)
-            button Change Password 

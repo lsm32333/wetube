@@ -1,7 +1,16 @@
 extends layouts/main
+//- layouts 폴더의 main.pug를 복붙해 온다는 뜻이다. 해당 레이아웃을 사용할 수 있다.
+include mixins/videoBlock
 
+//- block 태그 안에 내용 추가하기!
 block content
     .user-profile
         .user-profile__header
-            img.avatar(src="user.avatarUrl")
+            img.u-avatar(src=user.avatarUrl)
             h4.profile__username=user.name
+        if user.id === loggedUser.id
+            .user-profile__btns
+                a(href=`/users${routes.editProfile}`)
+                    button ✏️ Edit Profile
+                a(href=`/users${routes.changePassword}`)
+                    button 🔒 Change Password 
