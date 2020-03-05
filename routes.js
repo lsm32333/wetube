@@ -31,6 +31,12 @@ const DELETE_VIDEO = "/:id/delete";
 const GITHUB = "/auth/github";
 const GITHUB_CALLBACK = "/auth/github/callback";
 
+// API (server와 통신하기 위한 URL) => user는 이 URL에 접근도 불가능하고, 이 URL은 어떤 것도 rendering하지 않는다. (단순히 post 동작만을 하기 위해 만든 url이다)
+const API = "/api";
+const REGISTER_VIEW = "/:id/view";
+// 즉, 누군가 동영상보면, 렌더링 아무것도 안하고 그냥 view 숫자만 올리기 위한 api
+const ADD_COMMENT = "/:id/comment";
+
 const routes = {
   home: HOME,
   join: JOIN,
@@ -38,9 +44,8 @@ const routes = {
   logout: LOGOUT,
   search: SEARCH,
   users: USERS,
-  editProfile: EDIT_PROFILE,
   // 아래는 함수를 만든 것. id값을 URL에 ':id/'가 아니라, id 값 (숫자)를 띄우기 위해서 함수로 만든 것
-    // 함수로 만들었으면, ~~Router.js 파일에도 함수로 반드시 수정해줄 것!
+  // 함수로 만들었으면, ~~Router.js 파일에도 함수로 반드시 수정해줄 것!
   userDetail: id => {
     if (id) {
       return `/users/${id}`;
@@ -75,7 +80,10 @@ const routes = {
   },
   gitHub: GITHUB,
   githubCallback: GITHUB_CALLBACK,
-  me: ME
+  me: ME,
+  api: API,
+  registerView: REGISTER_VIEW,
+  addComment: ADD_COMMENT
 };
 
 export default routes;

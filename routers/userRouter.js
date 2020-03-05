@@ -4,10 +4,10 @@ import express from "express";
 import routes from "../routes";
 import { 
   userDetail, 
-  geteditProfile,
+  getEditProfile,
   getChangePassword,
   postEditProfile, 
-  postChangePassword 
+  postChangePassword
     } from "../controllers/userController";
 import { onlyPrivate, uploadAvatar } from "../middlewares";
 
@@ -15,7 +15,7 @@ const userRouter = express.Router();
 
 // 순서 중요
 
-userRouter.get(routes.editProfile, onlyPrivate, geteditProfile);
+userRouter.get(routes.editProfile, onlyPrivate, getEditProfile);
 userRouter.post(routes.editProfile, onlyPrivate, uploadAvatar, postEditProfile);
 
 userRouter.get(routes.changePassword, onlyPrivate, getChangePassword);

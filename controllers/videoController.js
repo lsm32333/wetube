@@ -38,8 +38,10 @@ export const search = async(req, res) => {
     // searchingBy, videos 변수도 search.pug에 전달함
 };
 
+
 // get은 url에 드러남. 그래서 렌더링만 해줌
 // post에서 내부적으로 처리해야 할 것들 처리해주고, 업데이트하고, redirect로 마무리
+
 
 export const getUpload = (req, res) => res.render("upload", { pageTitle: "Upload" });
 export const postUpload = async(req, res) => {
@@ -63,6 +65,7 @@ export const postUpload = async(req, res) => {
     res.redirect(routes.videoDetail(newVideo.id));
     // 업로드한 영상의 id 값을 통해 해당 비디오의 videoDetail로 redirect
 }
+
 
 // routes.js 참고하면, id 별로 다른 url을 가지게 할 수 있다.
 // id별로 다른 비디오에 들어가기 위해서는, 아래의 양식처럼 id를 가지고 비디오를 찾고, 그에 맞는 비디오를 띄워주는 페이지로 들어가야 한다! (req.params.id / try catch 구문 사용)
