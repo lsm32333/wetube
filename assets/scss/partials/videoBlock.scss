@@ -1,13 +1,12 @@
+// videoBlock.pug파일 보면서 작업
 .videoBlock {
-    video {
-      margin-bottom: 10px;
+  video {
       max-width: 100%;
-      width: 100%;
-      overflow: hidden;
-    }
-    .videoBlock__title {
+      margin-bottom: 10px;
+  }
+  .videoBlock__title {
       font-size: 18px;
       font-weight: 300;
       margin-bottom: 10px;
-    }
+  }
 }

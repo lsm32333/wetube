@@ -1,16 +1,22 @@
 extends layouts/main
+//- layouts 폴더의 main.pug를 복붙해 온다는 뜻이다. 해당 레이아웃을 사용할 수 있다.
 include mixins/videoBlock
 
+//- block 태그 안에 내용 추가하기!
 block content
     .search__header
-        h3 Searching for: #{searchingBy}
+        //- searchingBy 변수는 videoController.js 파일에 search 부분에서 정의함
+        h3 Searching by #{searchingBy}
+    //- 아래 부분은 검색했을 때, 결과로 나오는 영상들을 보여주는 부분
     .search__videos
+        //- 검색했을 때, 비디오가 1개도 검색이 안 된 경우
         if videos.length === 0
-            h5 No Videos Found
+            h5 No Video Found
         each item in videos
             +videoBlock({
                 title:item.title,
                 views:item.views,
-                fileUrl:item.fileUrl,
+                videoFile:item.videoFile,
                 id:item.id
             })
+            //- video 변수 => {title, views, videoFile, id}를 가진다

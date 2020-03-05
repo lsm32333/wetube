@@ -1,14 +1,17 @@
-@import "config/_variables.scss";
-@import "config/reset.scss";
-@import "config/utils.scss";
+@import "./config/variables";
+@import "./config/reset.scss";
 @import "main.scss";
-
-@import "partials/header.scss";
-@import "partials/footer.scss";
-@import "partials/form.scss";
-@import "partials/socialLogin.scss";
-@import "partials/videoBlock.scss";
-
-@import "pages/home.scss";
-@import "pages/videoDetail.scss";
-@import "pages/userProfile.scss";
+@import "./partials/header.scss";
+@import "./partials/footer.scss";
+@import "./partials/form.scss";
+@import "./partials/socialLogin.scss";
+@import './pages/videoDetail.scss';
+@import "./pages/home.scss";
+@import "./partials/videoBlock.scss";
+@import "./pages/userProfile.scss";
+@import "./config/utils.scss";
+@import "./partials/videoPlayer.scss";
+@import "./partials/videoRecorder.scss";
+// @를 붙이면 명령함수
+// 대부분의 scss파일은 만들고나면 여기서 import 해줘야 함!
+// 각종 scss 파일에서 작업한 것들을 여기 styles.scss로 import함 -> styles.scss는 웹팩에 의해 resulting.css(아마 styles.css)로 변환되고, pug 파일의 link rel에 의해 pug파일과 연동된다!!

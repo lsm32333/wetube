@@ -1,20 +1,43 @@
 extends layouts/main
+//- layouts 폴더의 main.pug를 복붙해 온다는 뜻이다. 해당 레이아웃을 사용할 수 있다.
+include mixins/videoPlayer
 
+//- block 태그 안에 내용 추가하기!
 block content
     .video-detail__container
-        .video__player
-            video(src=`/${video.fileUrl}`)
+        +videoPlayer({
+            src:video.fileUrl
+        })
         .video__info
-            a(href=routes.editVideo(video.id))
-                button Edit video
+            //- 비디오 작성자 id와 현재 로그인된 유저의 id가 같다면, Edit Video 버튼이 보이게 됨 (동영상 올린 사람만 편집할 수 있게 보안 작업)
+            if (loggedUser) && (video.creator.id === loggedUser.id)
+                //- videoController.js의 videoDetail함수를 보면, populate함수를 써서 전체 객체를 불러왔기 때문에, video.creator.id를 해야, 비디오 작성자의 id를 불러올 수 있다.
+                //- 만약 populate함수를 안 썼으면, 그냥 video.creator만 해도 됐겠지!
+                a(href=routes.editVideo(video.id))
+                    button Edit Video
+            //- routes.js의 editVideo 함수가 실행되고, 인자는 id가 되어, 해당 id를 가지는 동영상을 수정하는 페이지로 넘어가네!
             h5.video__title=video.title
             p.video__description=video.description
             if video.views === 1
                 span.video__views 1 view
-            else 
+            else
                 span.video__views #{video.views} views
+            .video__author
+                |Uploaded by
+                a(href=routes.userDetail(video.creator.id))=video.creator.name
         .video__comments
             if video.comments.length === 1
-                span.video__comment-number 1 comment
+                span.video__comments-number
+                    span#jsCommentNumber 1
+                    |  comment
             else
-                span.video__comment-number #{video.comments.length} comments 
+                span.video__comments-number
+                    span#jsCommentNumber=video.comments.length
+                    |  comments
+            form.add__comment#jsAddComment
+                input(type="text", placeholder="Add a Comment")
+                //- name="comment"라서, 해당 폼에 input되는 값을 videoController.js에서 req.body.comment를 가져올 수 있음
+            ul.video__comments-list#jsCommentList
+                each comment in video.comments.reverse()
+                    li
+                        span=comment.text

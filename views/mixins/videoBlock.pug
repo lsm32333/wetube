@@ -1,9 +1,18 @@
+//- mixin 기법은 html에서 자주 사용되는 코드들을 파일로 따로 만들고, include시켜 복붙을 안 해도 되도록 해준다!
+//- 이 파일은 비디오 재생하는 부분에 대한 공통 코드
+//- mixin 은 pug에서 쓰이는 함수, 객체가 필요
 mixin videoBlock(video = {})
+    //- video라는 변수 안에, {안에 여러 변수 만들 수 있도록!}
     .videoBlock
+        //- 썸네일, 제목, 조회수 누르면 videoDetail로 이동하도록 a 태그!
         a(href=routes.videoDetail(video.id))
-            video.videoBlock__thumbnail(src=video.videoFile, controls=false)
+            //- control 인자는 자동재생에 관한 것임.
+            video.videoBlock__thumbnail(src=video.videoFile, controls=true)
             h4.videoBlock__title=video.title
             if video.views === 1
                 h6.videoBlock__views 1 view
             else
                 h6.videoBlock__views #{video.views} views
+
+
+//- home.pug나 search.pug 파일에 양식 쓰임. video변수에 item의 각각이 들어감

@@ -1,14 +1,19 @@
+// home.pug 보면서 작업하면 됨
 .home-videos {
-    display: grid;
-    grid-template-columns: repeat(6, minmax(150px, 1fr));
-    grid-gap: 30px;
-    .videoBlock:first-child,
-    .videoBlock:nth-child(2) {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(150px, 1fr));
+  // minmax로, 화면이 줄어들어도 최소 150px이상, 최대 1fr 이하로 사이즈 유지시켜 줌
+  grid-gap: 30px;
+  // grid-gap으로 각 그리드 간 간격 둔다
+  .videoBlock:first-child,
+  .videoBlock:nth-child(2) {
       grid-column: span 3;
-    }
-    .videoBlock:nth-child(3),
-    .videoBlock:nth-child(4),
-    .videoBlock:nth-child(5) {
+      // grid-column: span은, 타겟인 그리드가 n개 column을 차지하게 된다는 것. 여기서는 첫째+둘째 그리드는 3열씩 차지
+  }
+  .videoBlock:nth-child(3),
+  .videoBlock:nth-child(4),
+  .videoBlock:nth-child(5) {
       grid-column: span 2;
-    }
+      // 3,4,5번째 그리드가 2열씩 차지하게 됨
+  }
 }

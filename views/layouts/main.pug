@@ -1,13 +1,15 @@
 doctype html
+//- 가장 메인이 되는 레이아웃. 다른 파일들에서 이 파일 가져다 쓴다. 이 파일만 수정하면 전체 레이아웃이 다 수정되는 효과를 누릴 수 있다.
 html
     head
         link(rel="stylesheet", href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU", crossorigin="anonymous")
         title #{pageTitle} | #{siteName}
+        //- locals로 siteName을 글로벌변수로 등록했기 때문에, 위처럼 쓸 수 있다.
         link(rel="stylesheet", href="/static/styles.css")
-
     body
         include ../partials/header
         main
             block content
         include ../partials/footer
+        //- footer 태그 대신에, partial 폴더의 footer.pug 파일 사용
         script(src="/static/main.js")

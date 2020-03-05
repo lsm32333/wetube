@@ -1,51 +1,63 @@
+// header.pug 파일에 대한 css 파일이다.
+// 즉, tag 이름 같은 것들은 header.pug 파일을 참고해서 작업해야 한다.
 .header {
   background-color: $red;
   margin-bottom: 50px;
+  // sass 파일 문법에 의해, 이렇게 태그 안에 태그가 들어가도 된다!!! 완전 편리
   .header__wrapper {
-    padding: 5px 0px;
-    width: 100%;
-    margin: 0 auto;
-    max-width: 1200px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    align-items: center;
-    .header__column {
-      i {
-        color: white;
-        font-size: 30px;
-      }
-      &:nth-child(2) {
-        width: 100%;
-        justify-self: center;
-      }
-      &:last-child {
-        justify-self: end;
-      }
-      ul {
-        display: flex;
-        color: white;
-        font-weight: 600;
-        text-transform: uppercase;
-        li:not(:last-child) {
-          margin-right: 15px;
-        }
-      }
-      form {
-        width: 100%;
-        input {
-          padding: 7px 10px;
-          width: 100%;
-          border-radius: 5px;
-          font-size: 14px;
-          color: $black;
-          font-weight: 600;
-          max-width: none;
-          &::placeholder {
-            font-weight: 300;
-            color: rgba(0, 0, 0, 0.7);
+      padding: 5px 0px;
+      width: 100%;
+      margin: 0 auto;
+      max-width: 1200px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      // 바탕 격자로 하고, 3열로, 각 크기 1fr으로 만듦
+      align-items: center;
+      .header__column {
+          i {
+              color: white;
+              // 아이콘 색깔을 흰색으로 지정
+              font-size: 30px;
+              // 아이콘 크기 조절
           }
-        }
+          // nth-child(숫자) 함수로 n번째 요소를 지정할 수 있다. / last-child는 마지막 요소 (이 문법도 sass에서 지원됨)
+          &:nth-child(2) {
+              justify-self: center;
+              width: 100%;
+              // justify-self 함수는, 자신이 가질 수 있는 영역 안에서 어디에 어떻게 배치될 지 지정
+          }
+          &:last-child {
+              justify-self: end;
+          }
+          ul {
+              display: flex;
+              // ul의 요소들이 가로로 나란히 배열
+              color: white;
+              font-weight: 600;
+              text-transform: uppercase;
+              // 글자 흰색 + 굵게 + 대문자
+              li:not(:last-child) {
+                  margin-right: 15px;
+                  // 마지막 요소 빼고 오른쪽에 마진 준다
+              }
+          }
+          form {
+              width: 100%;
+              input {
+                  padding: 7px 10px;
+                  // 패딩은 내부에 상하좌우 공간 / 마진은 바깥쪽에 공간
+                  width: 100%;
+                  border-radius: 5px;
+                  // border-radius로 꼭짓점 둥글게 깎는다
+                  font-size: 14px;
+                  color: $black;
+                  font-weight: 600;
+                  &::placeholder {
+                      font-weight: 300;
+                      color: rgba(0, 0, 0, 0.7);
+                  }
+              }
+          }
       }
-    }
   }
 }
