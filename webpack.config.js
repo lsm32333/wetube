@@ -16,52 +16,55 @@ const ENTRY_FILE = path.resolve(__dirname, "assets", "js", "main.js");
 
 const OUTPUT_DIR = path.join(__dirname, "static");
 
-
 // 변수 간단히... output에는 디렉토리(path), 파일이름(filename) 2개가 와야 함.
 const config = {
-    entry: ["@babel/polyfill", ENTRY_FILE],
-    mode: MODE,
-    // 특정 module을 만났을 때, 적용되는 rule. (rule은 array 형태다)
-    module: {
-        rules: [{
-                test: /\.(js)$/,
-                use: [{
-                    loader: "babel-loader"
-                }]
-            },
-            {
-                // 정규표현식으로, 들어온 파일이 .scss인지 확인
-                test: /\.(scss)$/,
-                // 확인 후, 1)scss파일을 css파일로 바꾸고, 2) css파일의 텍스트 부분만 추출하고, 3) 하나의 css파일로 모으는 것.
-                // extract 함수는 아래쪽부터 먼저 실행한다!!!
-                // 아래 모든 loader들 다 npm install 해주자!
-                use: ExtractCSS.extract([{
-                        // 마무리
-                        loader: "css-loader"
-                    },
-                    {
-                        // 아래에서 올라온 css파일을, plugin에 맞게 변환. (주로 호환성에 대해)
-                        loader: "postcss-loader",
-                        options: {
-                            plugins() {
-                                // 시중의 99.5%의 브라우저와 호환 가능
-                                return [autoprefixer({ overrideBrowserslist: "cover 99.5%" })];
-                            }
-                        }
-                    },
-                    {
-                        // scss, sass파일을 css파일로 바꿔주는 loader
-                        loader: "sass-loader"
-                    }
-                ])
-            }
+  entry: ["@babel/polyfill", ENTRY_FILE],
+  mode: MODE,
+  // 특정 module을 만났을 때, 적용되는 rule. (rule은 array 형태다)
+  module: {
+    rules: [
+      {
+        test: /\.(js)$/,
+        use: [
+          {
+            loader: "babel-loader"
+          }
         ]
-    },
-    output: {
-        path: OUTPUT_DIR,
-        filename: "[name].js"
-    },
-    plugins: [new ExtractCSS("styles.css")]
+      },
+      {
+        // 정규표현식으로, 들어온 파일이 .scss인지 확인
+        test: /\.(scss)$/,
+        // 확인 후, 1)scss파일을 css파일로 바꾸고, 2) css파일의 텍스트 부분만 추출하고, 3) 하나의 css파일로 모으는 것.
+        // extract 함수는 아래쪽부터 먼저 실행한다!!!
+        // 아래 모든 loader들 다 npm install 해주자!
+        use: ExtractCSS.extract([
+          {
+            // 마무리
+            loader: "css-loader"
+          },
+          {
+            // 아래에서 올라온 css파일을, plugin에 맞게 변환. (주로 호환성에 대해)
+            loader: "postcss-loader",
+            options: {
+              plugins() {
+                // 시중의 99.5%의 브라우저와 호환 가능
+                return [autoprefixer({ overrideBrowserslist: "cover 99.5%" })];
+              }
+            }
+          },
+          {
+            // scss, sass파일을 css파일로 바꿔주는 loader
+            loader: "sass-loader"
+          }
+        ])
+      }
+    ]
+  },
+  output: {
+    path: OUTPUT_DIR,
+    filename: "[name].js"
+  },
+  plugins: [new ExtractCSS("styles.css")]
 };
 
 module.exports = config;
